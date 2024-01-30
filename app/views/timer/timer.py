@@ -68,6 +68,11 @@ class TimerView(UserControl):
                                 ref=self.timer_hook
                             ),
                         ),
+                        IconButton(
+                            icon=icons.HISTORY,
+                            tooltip="Reset timer",
+                            on_click=lambda event: self.timer.reset(),
+                        ),
                     ],
                     alignment=MainAxisAlignment.CENTER,
                     vertical_alignment=CrossAxisAlignment.CENTER,

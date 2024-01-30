@@ -25,9 +25,17 @@ class TimerControl(UserControl):
             value=self._clock.format(0, 0, 0),
             text_align=TextAlign.CENTER,
             style=TextThemeStyle.DISPLAY_LARGE,
-            color=colors.PRIMARY
+            color=colors.PRIMARY,
         )
         self._centi_second = 0
+
+    def reset(self):
+        """
+        Set timer to 0:0:0
+        """
+        if not self._ticking:
+            self._timer.value = self._clock.format(0, 0, 0)
+            self._timer.update()
 
     def signal(self, ref: Ref[FloatingActionButton]):
         """
@@ -52,9 +60,7 @@ class TimerControl(UserControl):
         while self._ticking:
             second, centi_second = divmod(self._centi_second, 100)
             minute, second = divmod(second, 60)
-            self._timer.value = self._clock.format(
-                minute, second, centi_second
-            )
+            self._timer.value = self._clock.format(minute, second, centi_second)
             # self._timer.update()
             self.update()
             sleep(1 / 100)
