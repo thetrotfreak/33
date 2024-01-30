@@ -30,16 +30,12 @@ class ChooseThemeDialog(UserControl):
                     RadioGroup(
                         content=Column(
                             controls=[
-                                Radio(
-                                    value=ThemeMode.LIGHT.value, label="Light"
-                                ),
-                                Radio(
-                                    value=ThemeMode.DARK.value, label="Dark"
-                                ),
-                                Radio(
-                                    value=ThemeMode.SYSTEM.value,
-                                    label="System default",
-                                ),
+                                *map(
+                                    lambda enum: Radio(
+                                        value=enum[1].value, label=enum[1].value.title()
+                                    ),
+                                    ThemeMode._member_map_.items(),
+                                )
                             ]
                         ),
                         on_change=self._theme_mode,
